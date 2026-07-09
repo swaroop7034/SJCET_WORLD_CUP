@@ -38,7 +38,7 @@ export default function WorkflowSteps() {
             </div>
             <h3 className="font-display text-xl mb-2 text-foreground">Lock In</h3>
             <p className="text-sm text-muted-foreground">
-              Verify your email to lock your prediction and earn points!
+              Verify your email to lock your prediction before the deadline!
             </p>
           </div>
         </div>

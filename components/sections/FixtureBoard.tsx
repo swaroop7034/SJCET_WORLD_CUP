@@ -78,13 +78,13 @@ const m10Out = { x: 1140, y: (m5Out.y + m9Out.y) / 2 };
 const TROPHY_X = 1160;
 
 const matches: Match[] = [
-  { match_number: 1, x1: LEAF_RIGHT, y1: 281, x2: LEAF_RIGHT, y2: 387, spineX: 290, outX: m1Out.x, outY: m1Out.y, hasBox: false },
-  { match_number: 2, x1: LEAF_RIGHT, y1: 493, x2: LEAF_RIGHT, y2: 599, spineX: 290, outX: m2Out.x, outY: m2Out.y, hasBox: false },
+  { match_number: 1, x1: LEAF_RIGHT, y1: 281, x2: LEAF_RIGHT, y2: 387, spineX: 290, outX: m1Out.x, outY: m1Out.y, hasBox: true },
+  { match_number: 2, x1: LEAF_RIGHT, y1: 493, x2: LEAF_RIGHT, y2: 599, spineX: 290, outX: m2Out.x, outY: m2Out.y, hasBox: true },
   { match_number: 3, x1: m1Out.x, y1: m1Out.y, x2: LEAF_RIGHT, y2: 175, spineX: 430, outX: m3Out.x, outY: m3Out.y, hasBox: true },
   { match_number: 4, x1: m2Out.x, y1: m2Out.y, x2: LEAF_RIGHT, y2: 705, spineX: 430, outX: m4Out.x, outY: m4Out.y, hasBox: true },
   { match_number: 5, x1: m3Out.x, y1: m3Out.y, x2: m4Out.x, y2: m4Out.y, spineX: 700, outX: m5Out.x, outY: m5Out.y, hasBox: true },
-  { match_number: 6, x1: LEAF_RIGHT, y1: 811, x2: LEAF_RIGHT, y2: 917, spineX: 290, outX: m6Out.x, outY: m6Out.y, hasBox: false },
-  { match_number: 7, x1: LEAF_RIGHT, y1: 1023, x2: LEAF_RIGHT, y2: 1129, spineX: 290, outX: m7Out.x, outY: m7Out.y, hasBox: false },
+  { match_number: 6, x1: LEAF_RIGHT, y1: 811, x2: LEAF_RIGHT, y2: 917, spineX: 290, outX: m6Out.x, outY: m6Out.y, hasBox: true },
+  { match_number: 7, x1: LEAF_RIGHT, y1: 1023, x2: LEAF_RIGHT, y2: 1129, spineX: 290, outX: m7Out.x, outY: m7Out.y, hasBox: true },
   { match_number: 8, x1: m7Out.x, y1: m7Out.y, x2: LEAF_RIGHT, y2: 1235, spineX: 430, outX: m8Out.x, outY: m8Out.y, hasBox: true },
   { match_number: 9, x1: m6Out.x, y1: m6Out.y, x2: m8Out.x, y2: m8Out.y, spineX: 700, outX: m9Out.x, outY: m9Out.y, hasBox: true },
   { match_number: 10, x1: m5Out.x, y1: m5Out.y, x2: m9Out.x, y2: m9Out.y, spineX: 970, outX: m10Out.x, outY: m10Out.y, hasBox: true },
@@ -124,10 +124,7 @@ export default function FixtureBoard() {
     };
   }, []);
 
-  const dateLabel = (d: string) => {
-    const [, m, day] = d.split("-");
-    return `${parseInt(day)}/${parseInt(m)}/26`;
-  };
+
 
   return (
     <Section3D id="fixtures" className="py-20 bg-background">
@@ -143,21 +140,25 @@ export default function FixtureBoard() {
           <div className="min-w-[1100px]">
             <svg viewBox="0 0 1300 1300" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
               <defs>
+                {/* Connector lines: magenta → purple (secondary) */}
                 <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#f97316" />
-                  <stop offset="100%" stopColor="#dc2626" />
+                  <stop offset="0%" stopColor="oklch(0.65 0.28 350)" />
+                  <stop offset="100%" stopColor="oklch(0.55 0.24 300)" />
                 </linearGradient>
+                {/* Team boxes: lime → gold (primary → accent) */}
                 <linearGradient id="boxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#f97316" />
-                  <stop offset="100%" stopColor="#dc2626" />
+                  <stop offset="0%" stopColor="oklch(0.88 0.24 130)" />
+                  <stop offset="100%" stopColor="oklch(0.82 0.19 75)" />
                 </linearGradient>
+                {/* Winner box: gold shimmer */}
                 <linearGradient id="boxGradWon" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#facc15" />
-                  <stop offset="100%" stopColor="#ca8a04" />
+                  <stop offset="0%" stopColor="oklch(0.95 0.18 95)" />
+                  <stop offset="100%" stopColor="oklch(0.82 0.19 75)" />
                 </linearGradient>
+                {/* TBD box: muted dark */}
                 <linearGradient id="boxGradTBD" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#57534e" />
-                  <stop offset="100%" stopColor="#292524" />
+                  <stop offset="0%" stopColor="oklch(0.28 0.03 260)" />
+                  <stop offset="100%" stopColor="oklch(0.21 0.035 260)" />
                 </linearGradient>
               </defs>
 
@@ -178,15 +179,11 @@ export default function FixtureBoard() {
                 const fx = fixtures[m.match_number];
                 const played = fx?.played;
                 const topY = Math.min(m.y1, m.y2);
-                const dateY = topY - 40;
                 const scoreY = topY - 18;
                 return (
                   <g key={`label-${m.match_number}`}>
-                    <text x={m.spineX} y={dateY} textAnchor="middle" fill="#fff" fontSize={17} fontWeight={700}>
-                      {fx ? dateLabel(fx.match_date) : ""}
-                    </text>
                     {played && (
-                      <text x={m.spineX} y={scoreY} textAnchor="middle" fill="#facc15" fontSize={16} fontWeight={800}>
+                      <text x={m.spineX} y={scoreY} textAnchor="middle" fill="oklch(0.88 0.24 130)" fontSize={16} fontWeight={800}>
                         {fx.score_a} - {fx.score_b}
                       </text>
                     )}
@@ -194,7 +191,7 @@ export default function FixtureBoard() {
                 );
               })}
 
-              {/* Winner boxes for matches 3, 4, 5, 8, 9, 10 */}
+              {/* Winner boxes for all matches */}
               {matches
                 .filter((m) => m.hasBox)
                 .map((m) => {
@@ -219,7 +216,7 @@ export default function FixtureBoard() {
                         x={boxX + WBOX_W / 2}
                         y={boxY + WBOX_H / 2 + 5}
                         textAnchor="middle"
-                        fill={played ? "#422006" : "#d6d3d1"}
+                        fill={played ? "#422006" : "oklch(0.88 0.24 130)"}
                         fontSize={14}
                         fontWeight={800}
                       >
@@ -229,7 +226,7 @@ export default function FixtureBoard() {
                   );
                 })}
 
-              <text x={TROPHY_X} y={m10Out.y - 24} fill="#fde68a" fontSize={20} fontWeight={800}>
+              <text x={TROPHY_X} y={m10Out.y - 24} fill="oklch(0.88 0.24 130)" fontSize={20} fontWeight={800}>
                 Final
               </text>
               <text x={TROPHY_X} y={m10Out.y + 20} fontSize={32}>
@@ -266,7 +263,7 @@ export default function FixtureBoard() {
                       x={LEAF_X + BOX_W / 2}
                       y={n.cy + 7}
                       textAnchor="middle"
-                      fill={isWinner ? "#422006" : "#fff"}
+                      fill={isWinner ? "oklch(0.15 0.03 260)" : "oklch(0.15 0.03 260)"}
                       fontSize={22}
                       fontWeight={800}
                     >
