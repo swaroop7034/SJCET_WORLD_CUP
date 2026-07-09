@@ -5,7 +5,13 @@ import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 import Section3D from "@/components/shared/Section3D";
 
-export default function EmailAuth({ onAuthenticated }: { onAuthenticated: () => void }) {
+export default function EmailAuth({
+  onAuthenticated,
+  sectionId = "register",
+}: {
+  onAuthenticated: () => void;
+  sectionId?: string;
+}) {
   const [email, setEmail] = useState("");
   const [step, setStep] = useState<"email" | "sent">("email");
   const [loading, setLoading] = useState(false);
@@ -23,7 +29,7 @@ export default function EmailAuth({ onAuthenticated }: { onAuthenticated: () => 
   };
 
   return (
-    <Section3D id="register" className="relative py-24 border-y border-border/60 bg-card/30">
+    <Section3D id={sectionId} className="relative py-16 border-y border-border/60 bg-card/30 ">
       <div className="mx-auto max-w-md px-6">
         <div className="text-center mb-10">
           <h2 className="font-display text-4xl md:text-5xl">Student Login</h2>
@@ -31,7 +37,7 @@ export default function EmailAuth({ onAuthenticated }: { onAuthenticated: () => 
             Sign in with your email to predict matches.
           </p>
         </div>
-        <div className="bg-background p-8 rounded-2xl border border-border shadow-elegant">
+        <div className="bg-background p-4 rounded-2xl border border-border shadow-elegant">
           {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
           {step === "email" ? (
             <form onSubmit={handleSendLink} className="space-y-4">

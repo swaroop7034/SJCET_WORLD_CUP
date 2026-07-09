@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import type { Session } from "@supabase/supabase-js";
 import type { Student } from "@/types";
@@ -18,7 +19,6 @@ import PredictionBoard from "@/components/sections/PredictionBoard";
 import Leaderboard from "@/components/sections/Leaderboard";
 
 // Auth Components
-import EmailAuth from "@/components/auth/EmailAuth";
 import ProfileSetup from "@/components/auth/ProfileSetup";
 
 /* ---------------- Main Landing Page ---------------- */
@@ -26,6 +26,7 @@ export default function Landing() {
   const [session, setSession] = useState<Session | null>(null);
   const [student, setStudent] = useState<Student | null>(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -66,11 +67,9 @@ export default function Landing() {
 
         {!session && <WorkflowSteps />}
 
-        <FixtureBoard />
+        
 
-        {!session ? (
-          <EmailAuth onAuthenticated={() => {}} />
-        ) : !student && !loading ? (
+        {!session ? null : !student && !loading ? (
           <ProfileSetup
             session={session}
             onComplete={() => {
@@ -102,13 +101,12 @@ export default function Landing() {
         <PredictionBoard
           student={student}
           onLoginRequest={() => {
-            alert("Please log in or complete your profile to lock in predictions!");
-            const el = document.getElementById("register") || document.getElementById("profile");
-            if (el) el.scrollIntoView({ behavior: "smooth" });
+            router.push("/sign-in");
           }}
         />
 
         <Leaderboard />
+        <FixtureBoard />
       </main>
       <Footer />
     </div>

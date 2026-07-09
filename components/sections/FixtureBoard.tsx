@@ -139,8 +139,8 @@ export default function FixtureBoard() {
           Interdepartment Football Championship — Knockout Bracket
         </p>
 
-        <div className="relative w-full overflow-x-auto">
-          <div className="min-w-[1300px]">
+        <div className="relative w-full overflow-x-auto scrollbar-hide">
+          <div className="min-w-[1100px]">
             <svg viewBox="0 0 1300 1300" className="w-full h-auto" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">

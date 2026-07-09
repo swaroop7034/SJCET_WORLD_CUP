@@ -2,6 +2,7 @@
 
 /** Sticky navigation bar that appears on scroll */
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -39,19 +40,14 @@ export default function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <a
-            href="#fixtures"
-            className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary/20"
-          >
-            Fixtures
-          </a>
-          <a
-            href="#register"
+          
+          <Link
+            href="/sign-in"
             className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground shadow-glow hover:scale-105 transition-transform"
           >
             Sign In
             <span aria-hidden>→</span>
-          </a>
+          </Link>
         </div>
       </div>
     </header>
