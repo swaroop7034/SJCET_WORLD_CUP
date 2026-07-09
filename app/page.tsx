@@ -87,7 +87,7 @@ export default function Landing() {
           }}
         />
 
-        <Leaderboard />
+        {/* <Leaderboard /> */}
         <FixtureBoard />
       </main>
       <Footer />
