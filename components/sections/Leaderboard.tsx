@@ -30,7 +30,7 @@ export default function Leaderboard() {
             <div className="col-span-2 text-center">Rank</div>
             <div className="col-span-5">Student</div>
             <div className="col-span-3 text-center hidden md:block">Branch &amp; Year</div>
-            <div className="col-span-5 md:col-span-2 text-right pr-4">Points</div>
+            {/* <div className="col-span-5 md:col-span-2 text-right pr-4">Points</div> */}
           </div>
           <div className="divide-y divide-border/40">
             {players.length === 0 && (
@@ -52,9 +52,9 @@ export default function Leaderboard() {
                 <div className="col-span-3 text-center hidden md:block text-sm text-muted-foreground">
                   {p.branch} - Year {p.year}
                 </div>
-                <div className="col-span-5 md:col-span-2 text-right pr-4 font-display text-2xl text-primary">
+                {/* <div className="col-span-5 md:col-span-2 text-right pr-4 font-display text-2xl text-primary">
                   {p.total_points}
-                </div>
+                </div> */}
               </div>
             ))}
           </div>
