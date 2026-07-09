@@ -88,7 +88,7 @@ export default function Landing() {
         />
 
         {/* <Leaderboard /> */}
-        <FixtureBoard />
+        {/* <FixtureBoard /> */}
       </main>
       <Footer />
     </div>
