@@ -98,7 +98,7 @@ export default function PredictionBoard({
             Lock in your predictions before the deadline.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className={visibleMatches.length === 1 ? "flex justify-center" : "grid md:grid-cols-2 gap-6"}>
           {visibleMatches.length === 0 && (
             <p className="text-center col-span-2 text-muted-foreground">
               No upcoming matches found.
@@ -115,7 +115,11 @@ export default function PredictionBoard({
             return (
               <div
                 key={m.id}
-                className="relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-elegant hover:border-primary/50 transition"
+                className={
+                  visibleMatches.length === 1
+                    ? "relative w-full max-w-2xl overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-elegant hover:border-primary/50 transition"
+                    : "relative overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-elegant hover:border-primary/50 transition"
+                }
               >
                 <div className="flex justify-between items-center mb-6">
                   <span className="text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full">
