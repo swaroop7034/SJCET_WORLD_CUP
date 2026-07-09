@@ -9,7 +9,6 @@ import type { Student } from "@/types";
 // Layout & Shared Components
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
-import Section3D from "@/components/shared/Section3D";
 
 // Hero & Feature Sections
 import HeroScene from "@/components/hero/HeroScene";
@@ -52,12 +51,12 @@ export default function Landing() {
           setLoading(false);
         });
     } else {
-      setStudent(null);
-      setLoading(false);
+      void Promise.resolve().then(() => {
+        setStudent(null);
+        setLoading(false);
+      });
     }
   }, [session]);
-
-  const handleSignOut = () => supabase.auth.signOut();
 
   return (
     <div className="dark bg-background text-foreground min-h-screen">
@@ -66,8 +65,6 @@ export default function Landing() {
         <HeroScene />
 
         {!session && <WorkflowSteps />}
-
-        
 
         {!session ? null : !student && !loading ? (
           <ProfileSetup
@@ -81,22 +78,7 @@ export default function Landing() {
                 .then(({ data }) => setStudent(data));
             }}
           />
-        ) : (
-          student && (
-            <Section3D
-              id="welcome"
-              className="py-8 bg-primary/10 border-y border-primary/20 text-center"
-            >
-              <p className="text-primary font-semibold text-lg">Welcome back, {student.name}!</p>
-              <button
-                onClick={handleSignOut}
-                className="text-xs underline mt-2 text-muted-foreground hover:text-foreground"
-              >
-                Sign Out
-              </button>
-            </Section3D>
-          )
-        )}
+        ) : null}
 
         <PredictionBoard
           student={student}

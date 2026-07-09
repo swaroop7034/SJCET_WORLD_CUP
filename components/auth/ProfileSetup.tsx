@@ -6,7 +6,13 @@ import type { Session } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import Section3D from "@/components/shared/Section3D";
 
-export default function ProfileSetup({ session, onComplete }: { session: Session; onComplete: () => void }) {
+export default function ProfileSetup({
+  session,
+  onComplete,
+}: {
+  session: Session;
+  onComplete: () => void;
+}) {
   const [name, setName] = useState<string>("");
   const [branch, setBranch] = useState<string>("");
   const [year, setYear] = useState<string>("");
@@ -29,10 +35,15 @@ export default function ProfileSetup({ session, onComplete }: { session: Session
   };
 
   return (
-    <Section3D id="profile" className="relative py-24 border-y border-border/60 bg-card/30">
+    <Section3D
+      id="profile"
+      className="relative py-24 border-y border-border/60 bg-card/30"
+    >
       <div className="mx-auto max-w-lg px-6">
         <div className="text-center mb-10">
-          <h2 className="font-display text-4xl md:text-5xl">Complete Your Profile</h2>
+          <h2 className="font-display text-4xl md:text-5xl">
+            Complete Your Profile
+          </h2>
           <p className="mt-4 text-sm text-muted-foreground">
             We need your college details before you can predict.
           </p>
@@ -41,7 +52,9 @@ export default function ProfileSetup({ session, onComplete }: { session: Session
           onSubmit={handleSave}
           className="space-y-4 bg-background p-8 rounded-2xl border border-border shadow-elegant"
         >
-          {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
+          {error && (
+            <p className="text-red-500 text-sm mb-4 text-center">{error}</p>
+          )}
           <div className="space-y-2">
             <label className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
               Name
@@ -67,11 +80,16 @@ export default function ProfileSetup({ session, onComplete }: { session: Session
                 className="w-full bg-card border border-border rounded-lg px-4 py-3 text-sm focus:border-primary focus:outline-none appearance-none"
               >
                 <option value="">Select Branch</option>
-                <option value="CS">Computer Science</option>
-                <option value="IT">Information Tech</option>
-                <option value="ME">Mechanical</option>
-                <option value="CE">Civil</option>
-                <option value="EE">Electrical</option>
+                <option value="AD">AD</option>
+                <option value="CE">CE</option>
+                <option value="CS">CS</option>
+                <option value="CS(AI)">CS(AI)</option>
+                <option value="CY">CY</option>
+                <option value="ECE">ECE</option>
+                <option value="ECS">ECS</option>
+                <option value="EEE">EEE</option>
+                <option value="MCA">MCA & IMCA</option>
+                <option value="ME">ME</option>
               </select>
             </div>
             <div className="space-y-2">
