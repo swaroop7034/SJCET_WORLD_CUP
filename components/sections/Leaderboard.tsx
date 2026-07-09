@@ -51,6 +51,7 @@ export default function Leaderboard() {
                 <div className="col-span-3 text-center text-sm text-muted-foreground">
                   {p.branch} - Year {p.year}
                 </div>
+
               </div>
             ))}
           </div>

@@ -94,35 +94,35 @@ export default function FixtureBoard() {
   const [fixtures, setFixtures] = useState<Record<number, FixtureRow>>({});
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const loadFixtures = () => {
-      supabase
-        .from("fixtures")
-        .select("*")
-        .order("match_number")
-        .then(({ data, error }) => {
-          if (error) {
-            console.error("Error loading fixtures:", error.message);
-          } else if (data) {
-            const map: Record<number, FixtureRow> = {};
-            (data as FixtureRow[]).forEach((row) => (map[row.match_number] = row));
-            setFixtures(map);
-          }
-          setLoading(false);
-        });
-    };
+  // useEffect(() => {
+  //   const loadFixtures = () => {
+  //     supabase
+  //       .from("fixtures")
+  //       .select("*")
+  //       .order("match_number")
+  //       .then(({ data, error }) => {
+  //         if (error) {
+  //           console.error("Error loading fixtures:", error.message);
+  //         } else if (data) {
+  //           const map: Record<number, FixtureRow> = {};
+  //           (data as FixtureRow[]).forEach((row) => (map[row.match_number] = row));
+  //           setFixtures(map);
+  //         }
+  //         setLoading(false);
+  //       });
+  //   };
 
-    loadFixtures();
+  //   loadFixtures();
 
-    const channel = supabase
-      .channel("fixtures-live")
-      .on("postgres_changes", { event: "*", schema: "public", table: "fixtures" }, loadFixtures)
-      .subscribe();
+  //   const channel = supabase
+  //     .channel("fixtures-live")
+  //     .on("postgres_changes", { event: "*", schema: "public", table: "fixtures" }, loadFixtures)
+  //     .subscribe();
 
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, []);
+  //   return () => {
+  //     supabase.removeChannel(channel);
+  //   };
+  // }, []);
 
 
 
@@ -274,7 +274,7 @@ export default function FixtureBoard() {
               })}
             </svg>
           </div>
-          {loading && <p className="text-center text-sm text-muted-foreground mt-4">Loading fixtures…</p>}
+          {/* {loading && <p className="text-center text-sm text-muted-foreground mt-4">Loading fixtures…</p>} */}
         </div>
       </div>
     </Section3D>
