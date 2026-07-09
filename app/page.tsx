@@ -66,7 +66,7 @@ export default function Landing() {
 
         {!session && <WorkflowSteps />}
 
-        {!session ? null : !student && !loading ? (
+        {/* {!session ? null : !student && !loading ? (
           <ProfileSetup
             session={session}
             onComplete={() => {
@@ -78,7 +78,7 @@ export default function Landing() {
                 .then(({ data }) => setStudent(data));
             }}
           />
-        ) : null}
+        ) : null} */}
 
         <PredictionBoard
           student={student}
