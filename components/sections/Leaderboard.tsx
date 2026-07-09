@@ -15,10 +15,11 @@ export default function Leaderboard() {
       .limit(10)
       .then(({ data, error }) => {
         if (error) {
-          console.error("Error fetching leaderboard:", error.message);
-          return;
+          console.error("Leaderboard error:", error);
+        } else if (data) {
+          console.log("Leaderboard data:", data);
+          setPlayers(data);
         }
-        if (data) setPlayers(data);
       });
   }, []);
 

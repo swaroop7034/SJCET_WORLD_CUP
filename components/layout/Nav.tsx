@@ -43,7 +43,7 @@ export default function Nav() {
       .from("students")
       .select("*")
       .eq("auth_id", session.user.id)
-      .single()
+      .maybeSingle()
       .then(({ data }) => {
         setStudent(data);
       });

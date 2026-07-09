@@ -45,7 +45,7 @@ export default function Landing() {
         .from("students")
         .select("*")
         .eq("auth_id", session.user.id)
-        .single()
+        .maybeSingle()
         .then(({ data }) => {
           setStudent(data);
           setLoading(false);
@@ -74,7 +74,7 @@ export default function Landing() {
                 .from("students")
                 .select("*")
                 .eq("auth_id", session.user.id)
-                .single()
+                .maybeSingle()
                 .then(({ data }) => setStudent(data));
             }}
           />
