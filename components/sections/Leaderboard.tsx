@@ -12,7 +12,7 @@ export default function Leaderboard() {
   useEffect(() => {
     supabase
       .rpc("get_leaderboard")
-      .limit(50)
+      .limit(10)
       .then(({ data }) => {
         if (data) setPlayers(data);
       });
