@@ -20,7 +20,7 @@ export default function WorkflowSteps() {
             </div>
             <h3 className="font-display text-xl mb-2 text-foreground">Browse</h3>
             <p className="text-sm text-muted-foreground">
-              Scroll down to view the fixture bracket, match dates, and public results.
+              Scroll down to view upcoming matches and results.
             </p>
           </div>
           <div className="relative p-6 rounded-2xl border border-border bg-card/50 text-center">

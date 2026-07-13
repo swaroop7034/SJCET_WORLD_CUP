@@ -78,7 +78,7 @@ export default function Nav() {
           </span>
         </a>
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          {["Fixtures", "Matches", "Leaderboard", "Rules"].map((l) => (
+          {["Matches", "Leaderboard", "Rules"].map((l) => (
             <a
               key={l}
               href={`#${l.toLowerCase().replace(" ", "-")}`}

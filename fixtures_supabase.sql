@@ -144,8 +144,8 @@ $$;
 -- 6. RPC: get_leaderboard
 --    Called by Leaderboard.tsx
 --    Points system:
---      • Exact scoreline correct  → 3 pts
---      • Correct winner only      → 1 pt
+--      • Exact scoreline correct  → 5 pts
+--      • Correct winner only      → 3 pts
 --      • Wrong                    → 0 pts
 -- ================================================================
 create or replace function public.get_leaderboard()
@@ -166,8 +166,8 @@ returns table (
       case
         when m.actual_score_a is null then 0          -- match not played yet
         when p.predicted_score_a = m.actual_score_a
-         and p.predicted_score_b = m.actual_score_b then 3   -- exact score
-        when p.predicted_winner  = m.actual_winner   then 1  -- correct winner only
+         and p.predicted_score_b = m.actual_score_b then 5   -- exact score
+        when p.predicted_winner  = m.actual_winner   then 3  -- correct winner only
         else 0
       end
     ), 0) as total_points,
@@ -176,8 +176,8 @@ returns table (
         case
           when m.actual_score_a is null then 0
           when p.predicted_score_a = m.actual_score_a
-           and p.predicted_score_b = m.actual_score_b then 3
-          when p.predicted_winner  = m.actual_winner   then 1
+           and p.predicted_score_b = m.actual_score_b then 5
+          when p.predicted_winner  = m.actual_winner   then 3
           else 0
         end
       ), 0) desc
@@ -245,9 +245,9 @@ where team_a = 'Brazil' and team_b = 'Argentina';
 -- ================================================================
 /*
 update public.fixtures set
-  score_a = 3,
+  score_a = 0,
   score_b = 1,
-  winner  = 'CY',
+  winner  = 'ECS',
   played  = true
 where match_number = 1;
 */

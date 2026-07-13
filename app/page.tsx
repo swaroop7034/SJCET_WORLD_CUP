@@ -13,7 +13,7 @@ import Footer from "@/components/layout/Footer";
 // Hero & Feature Sections
 import HeroScene from "@/components/hero/HeroScene";
 import WorkflowSteps from "@/components/sections/WorkflowSteps";
-import FixtureBoard from "@/components/sections/FixtureBoard";
+
 import PredictionBoard from "@/components/sections/PredictionBoard";
 import Leaderboard from "@/components/sections/Leaderboard";
 
@@ -66,7 +66,7 @@ export default function Landing() {
 
         {!session && <WorkflowSteps />}
 
-        {/* {!session ? null : !student && !loading ? (
+        {!session ? null : !student && !loading ? (
           <ProfileSetup
             session={session}
             onComplete={() => {
@@ -78,7 +78,7 @@ export default function Landing() {
                 .then(({ data }) => setStudent(data));
             }}
           />
-        ) : null} */}
+        ) : null}
 
         <PredictionBoard
           student={student}
@@ -87,8 +87,7 @@ export default function Landing() {
           }}
         />
 
-        {/* <Leaderboard /> */}
-        {/* <FixtureBoard /> */}
+        <Leaderboard />
       </main>
       <Footer />
     </div>

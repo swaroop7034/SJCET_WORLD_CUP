@@ -38,10 +38,11 @@ export default function Leaderboard() {
           </h2>
         </div>
         <div className="bg-background rounded-2xl border border-border shadow-elegant overflow-hidden">
-          <div className="grid grid-cols-10 gap-4 p-4 border-b border-border/60 bg-muted/30 text-xs font-bold uppercase tracking-widest text-muted-foreground">
+          <div className="grid grid-cols-12 gap-4 p-4 border-b border-border/60 bg-muted/30 text-xs font-bold uppercase tracking-widest text-muted-foreground">
             <div className="col-span-2 text-center">Rank</div>
             <div className="col-span-5">Student</div>
             <div className="col-span-3 text-center">Branch &amp; Year</div>
+            <div className="col-span-2 text-center">Points</div>
           </div>
           <div className="divide-y divide-border/40">
             {players.length === 0 && (
@@ -52,7 +53,7 @@ export default function Leaderboard() {
             {players.map((p) => (
               <div
                 key={p.id}
-                className="grid grid-cols-10 gap-4 p-4 items-center hover:bg-primary/5 transition group"
+                className="grid grid-cols-12 gap-4 p-4 items-center hover:bg-primary/5 transition group"
               >
                 <div className="col-span-2 text-center">
                   <span
@@ -66,6 +67,9 @@ export default function Leaderboard() {
                 </div>
                 <div className="col-span-3 text-center text-sm text-muted-foreground">
                   {p.branch} - Year {p.year}
+                </div>
+                <div className="col-span-2 text-center font-bold text-primary text-xl">
+                  {p.total_points}
                 </div>
               </div>
             ))}
