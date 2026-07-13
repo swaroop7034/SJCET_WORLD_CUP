@@ -61,19 +61,28 @@ function BodyPart({
 }
 
 /* ---------- 3D floating particles ---------- */
-const PARTICLES = Array.from({ length: 18 }).map((_, i) => ({
-  id: i,
-  left: `${5 + Math.random() * 90}%`,
-  top: `${10 + Math.random() * 75}%`,
-  z: -150 + Math.random() * 400,
-  size: 2 + Math.random() * 3,
-  dx: `${-30 + Math.random() * 60}px`,
-  dy: `${-80 + Math.random() * 40}px`,
-  dz: `${-20 + Math.random() * 60}px`,
-  duration: `${5 + Math.random() * 6}s`,
-  delay: `${Math.random() * 5}s`,
-  hue: 130 + Math.random() * 30,
-}));
+// Use a simple seeded PRNG so server and client HTML perfectly match!
+const pseudoRandom = (seed: number) => {
+  const x = Math.sin(seed * 12.9898) * 43758.5453;
+  return x - Math.floor(x);
+};
+
+const PARTICLES = Array.from({ length: 18 }).map((_, i) => {
+  const rnd = (offset: number) => pseudoRandom(i * 10 + offset);
+  return {
+    id: i,
+    left: `${5 + rnd(1) * 90}%`,
+    top: `${10 + rnd(2) * 75}%`,
+    z: -150 + rnd(3) * 400,
+    size: 2 + rnd(4) * 3,
+    dx: `${-30 + rnd(5) * 60}px`,
+    dy: `${-80 + rnd(6) * 40}px`,
+    dz: `${-20 + rnd(7) * 60}px`,
+    duration: `${5 + rnd(8) * 6}s`,
+    delay: `${rnd(9) * 5}s`,
+    hue: 130 + rnd(10) * 30,
+  };
+});
 
 /* ================================================
    Main exported component

@@ -171,7 +171,7 @@ returns table (
         else 0
       end
     ), 0) as total_points,
-    rank() over (
+    row_number() over (
       order by coalesce(sum(
         case
           when m.actual_score_a is null then 0
@@ -180,13 +180,31 @@ returns table (
           when p.predicted_winner  = m.actual_winner   then 3
           else 0
         end
+      ), 0) desc,
+      coalesce(sum(
+        case 
+          when m.actual_score_a is not null 
+           and p.predicted_score_a = m.actual_score_a
+           and p.predicted_score_b = m.actual_score_b then 1
+          else 0 
+        end
       ), 0) desc
-    ) as rank
+    )::bigint as rank
+    
   from public.students s
   left join public.predictions p on p.student_id = s.id
   left join public.matches     m on m.id = p.match_id
   group by s.id, s.name, s.branch, s.year
-  order by total_points desc;
+  order by 
+    total_points desc,
+    coalesce(sum(
+      case 
+        when m.actual_score_a is not null 
+         and p.predicted_score_a = m.actual_score_a
+         and p.predicted_score_b = m.actual_score_b then 1
+        else 0 
+      end
+    ), 0) desc;
 $$;
 
 

@@ -45,7 +45,7 @@ export default function ProfileSetupPage() {
       <main className="dark min-h-screen bg-background px-4 py-14 text-foreground">
         <div className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
-            Predict26
+          Predict26
           </p>
           <h1 className="mt-3 font-display text-3xl md:text-5xl">
             Sign in to complete your profile
